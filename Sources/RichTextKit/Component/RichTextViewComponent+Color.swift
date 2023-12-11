@@ -34,13 +34,13 @@ public extension RichTextViewComponent {
         if currentColor(color) == val { return }
         switch color {
         case .foreground:
-            setCurrentRichTextAttribute(.foregroundColor, to: val)
+            setTypingAttribute(.foregroundColor, to: val)
         case .background:
-            setCurrentRichTextAttribute(.backgroundColor, to: val)
+            setTypingAttribute(.backgroundColor, to: val)
         case .strikethrough:
-            setCurrentRichTextAttribute(.strikethroughColor, to: val)
+            setTypingAttribute(.strikethroughColor, to: val)
         case .stroke:
-            setCurrentRichTextAttribute(.strokeColor, to: val)
+            setTypingAttribute(.strokeColor, to: val)
         }
     }
 }
