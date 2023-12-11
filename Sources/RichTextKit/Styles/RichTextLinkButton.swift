@@ -56,7 +56,8 @@ extension RichTextLinkButton {
     private func toggle() {
         // This turns off/disables link.
         if context.link != nil {
-            context.setLink(nil)
+            context.userActionPublisher.send(.link(nil))
+//            context.link = nil
         } else {
             isAlertPresented = true
         }

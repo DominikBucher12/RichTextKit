@@ -45,7 +45,7 @@ final class RichTextViewComponent_AttributesTests: XCTestCase {
 
     func testTextAttributesIsValidForSelectedRange() {
         textView.setSelectedRange(selectedRange)
-        textView.setCurrentRichTextAttribute(.font, to: font)
+        textView.setTypingAttribute(.font, to: font)
         assertEqualAttributes(textView.currentRichTextAttributes)
         assertEqualAttributes(textView.richTextAttributes(at: selectedRange))
         assertEqualAttributes(textView.typingAttributes)
@@ -53,7 +53,7 @@ final class RichTextViewComponent_AttributesTests: XCTestCase {
 
     func testTextAttributesIsValidForNoSelectedRange() {
         textView.setSelectedRange(noRange)
-        textView.setCurrentRichTextAttribute(.font, to: font)
+        textView.setTypingAttribute(.font, to: font)
         #if iOS || os(tvOS)
         assertEqualAttributes(textView.currentRichTextAttributes)
         #endif
@@ -64,7 +64,7 @@ final class RichTextViewComponent_AttributesTests: XCTestCase {
 
     func testTextAttributeValueForKeyIsValidForSelectedRange() {
         textView.setSelectedRange(selectedRange)
-        textView.setCurrentRichTextAttribute(.font, to: font)
+        textView.setTypingAttribute(.font, to: font)
         assertEqualAttribute(textView.currentRichTextAttribute(.font))
         assertEqualAttribute(textView.richTextAttribute(.font, at: selectedRange))
         assertEqualAttribute(textView.typingAttributes[.font])
@@ -72,7 +72,7 @@ final class RichTextViewComponent_AttributesTests: XCTestCase {
 
     func testTextAttributeValueForKeyIsValidForNoSelectedRange() {
         textView.setSelectedRange(noRange)
-        textView.setCurrentRichTextAttribute(.font, to: font)
+        textView.setTypingAttribute(.font, to: font)
         #if iOS || os(tvOS)
         assertEqualAttribute(textView.currentRichTextAttribute(.font))
         #endif

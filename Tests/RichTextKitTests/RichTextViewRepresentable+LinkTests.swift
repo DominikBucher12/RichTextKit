@@ -25,7 +25,7 @@ class RichTextViewComponent_LinkTests: XCTestCase {
     let selectedRange = NSRange(location: 4, length: 3)
     
     override func setUp() {
-        textView = RichTextView()
+        textView = RichTextView(frame: .zero)
         textView.setup(
             with: NSAttributedString(string: "foo bar baz"),
             format: .rtf,

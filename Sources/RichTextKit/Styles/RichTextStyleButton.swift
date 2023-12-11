@@ -60,6 +60,7 @@ public struct RichTextStyleButton: View {
         context: RichTextContext,
         fillVertically: Bool = false
     ) {
+        //TODO: Single init is enough.
         self.init(
             style: style,
             buttonStyle: buttonStyle,

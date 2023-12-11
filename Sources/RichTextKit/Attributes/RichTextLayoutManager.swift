@@ -5,6 +5,7 @@ import UIKit
 #endif
 
 public final class RichTextLayoutManager: NSLayoutManager {
+
     public override init() {
         super.init()
     }

@@ -23,7 +23,6 @@ public extension RichTextViewComponent {
                 string.addAttribute(.foregroundColor, value: ColorRepresentable.textColor, range: range)
                 string.fixAttributes(in: range)
             }
-            
             string.endEditing()
             self.typingAttributes = [.font: FontRepresentable.standardRichTextFont, .foregroundColor: ColorRepresentable.textColor]
             setCurrentFont(.standardRichTextFont)

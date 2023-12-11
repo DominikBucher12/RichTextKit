@@ -15,11 +15,7 @@ enum RichTextUserAction {
 //    case .ForegroundColor
 //    case .HighlightedRange
 //    case .HighlightingStyle
-//    case .IsBold
 //    case .IsEditingText
-//    case .IsItalic
-//    case .IsStrikethrough
-//    case .IsUnderlined
 //    case .ShouldPasteImage
 //    case .ShouldPasteImages
 //    case .ShouldPasteText
@@ -28,6 +24,6 @@ enum RichTextUserAction {
 //    case .StrikethroughColor
 //    case .StrokeColor
 //    case .TriggerAction
-//    case .Link
+    case link(URL?)
     case changeStyle(RichTextStyle, Bool)
 }
