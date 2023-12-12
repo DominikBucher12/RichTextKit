@@ -41,6 +41,7 @@ open class RichTextCoordinator: NSObject {
         self.text = text
         self.textView = textView
         self.richTextContext = richTextContext
+        self.linksSetter = RichTextLinkSetter(textView: textView)
         super.init()
         self.textView.delegate = self
        // subscribeToContextChanges()
@@ -48,6 +49,7 @@ open class RichTextCoordinator: NSObject {
 //        textView.attributedString = text.wrappedValue
     }
 
+    public let linksSetter: RichTextLinkSetter
    
 
     // MARK: - Properties

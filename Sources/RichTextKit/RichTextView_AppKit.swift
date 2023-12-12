@@ -172,6 +172,19 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     open func undoLatestChange() {
         undoManager?.undo()
     }
+    
+    open func renderLinks(in characterRange: NSRange, at origin: CGPoint) {
+        attributedString().enumerateAttribute(
+            .customLink,
+            in: characterRange,
+            using: { [weak textStorage] value, range, _ in
+                if let value = value as? CustomLinkAttributes, let link = value.link {
+                    textStorage?.addAttribute(.link, value: link, range: range)
+                    textStorage?.addAttribute(.foregroundColor, value: value.color, range: range)
+                }
+            }
+        )
+    }
 }
 
 
