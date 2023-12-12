@@ -42,7 +42,7 @@ public struct RichTextStyleToggleGroup: View {
         self.buttonStyle = buttonStyle
     }
 
-    @State private var urlString = ""
+    @State private var urlString = "https://seznam.cz"
     @State private var isAlertPresented = false
     
     private let styles: [RichTextStyle]

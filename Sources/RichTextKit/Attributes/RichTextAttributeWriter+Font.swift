@@ -46,16 +46,16 @@ public extension RichTextAttributeWriter {
         guard text.length > 0 else { return }
         let range = range ?? richTextRange
         let fontName = settableFontName(for: name)
-        text.beginEditing()
-        text.enumerateAttribute(.font, in: range, options: .init()) { value, range, _ in
-            let oldFont = value as? FontRepresentable ?? .standardRichTextFont
-            let size = oldFont.pointSize
-            let newFont = FontRepresentable(name: fontName, size: size) ?? .standardRichTextFont
-            text.removeAttribute(.font, range: range)
-            text.addAttribute(.font, value: newFont, range: range)
-            text.fixAttributes(in: range)
+        text.edit {
+            text.enumerateAttribute(.font, in: range, options: .init()) { value, range, _ in
+                let oldFont = value as? FontRepresentable ?? .standardRichTextFont
+                let size = oldFont.pointSize
+                let newFont = FontRepresentable(name: fontName, size: size) ?? .standardRichTextFont
+                text.removeAttribute(.font, range: range)
+                text.addAttribute(.font, value: newFont, range: range)
+                text.fixAttributes(in: range)
+            }
         }
-        text.endEditing()
     }
 
     /// Set the font size at a certain range.
@@ -66,15 +66,15 @@ public extension RichTextAttributeWriter {
         guard let text = mutableRichText else { return }
         guard text.length > 0 else { return }
         let range = range ?? richTextRange
-        text.beginEditing()
-        text.enumerateAttribute(.font, in: range, options: .init()) { value, range, _ in
-            let oldFont = value as? FontRepresentable ?? .standardRichTextFont
-            let newFont = oldFont.withSize(size)
-            text.removeAttribute(.font, range: range)
-            text.addAttribute(.font, value: newFont, range: range)
-            text.fixAttributes(in: range)
+        text.edit {
+            text.enumerateAttribute(.font, in: range, options: .init()) { value, range, _ in
+                let oldFont = value as? FontRepresentable ?? .standardRichTextFont
+                let newFont = oldFont.withSize(size)
+                text.removeAttribute(.font, range: range)
+                text.addAttribute(.font, value: newFont, range: range)
+                text.fixAttributes(in: range)
+            }
         }
-        text.endEditing()
     }
 
     /// Step the font size at a certain range.

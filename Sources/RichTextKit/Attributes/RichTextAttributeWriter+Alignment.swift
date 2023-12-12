@@ -93,10 +93,10 @@ private extension RichTextAttributeWriter {
         let style = attributes[.paragraphStyle] as? NSMutableParagraphStyle ?? NSMutableParagraphStyle()
         style.alignment = alignment.nativeAlignment
         attributes[.paragraphStyle] = style
-        text.beginEditing()
-        text.setAttributes(attributes, range: safeRange)
-        text.fixAttributes(in: safeRange)
-        text.endEditing()
+        text.edit {
+            text.setAttributes(attributes, range: safeRange)
+            text.fixAttributes(in: safeRange)
+        }
     }
 
     func setAlignment(

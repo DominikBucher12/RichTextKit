@@ -38,7 +38,6 @@ open class RichTextCoordinator: NSObject {
         textView: RichTextView,
         richTextContext: RichTextContext
     ) {
-        textView.attributedString = text.wrappedValue
         self.text = text
         self.textView = textView
         self.richTextContext = richTextContext
@@ -46,6 +45,7 @@ open class RichTextCoordinator: NSObject {
         self.textView.delegate = self
        // subscribeToContextChanges()
         subscribeToUserActions()
+//        textView.attributedString = text.wrappedValue
     }
 
    

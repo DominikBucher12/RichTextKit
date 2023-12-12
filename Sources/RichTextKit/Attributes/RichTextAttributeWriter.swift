@@ -58,14 +58,14 @@ public extension RichTextAttributeWriter {
         let rangeValue = range ?? richTextRange
         let range = safeRange(for: rangeValue)
         guard let string = mutableRichText else { return }
-        string.beginEditing()
-        attributes.forEach { attribute, newValue in
-            string.enumerateAttribute(attribute, in: range, options: .init()) { _, range, _ in
-                string.removeAttribute(attribute, range: range)
-                string.addAttribute(attribute, value: newValue, range: range)
-                string.fixAttributes(in: range)
+        string.edit {
+            attributes.forEach { attribute, newValue in
+                string.enumerateAttribute(attribute, in: range, options: .init()) { _, range, _ in
+                    string.removeAttribute(attribute, range: range)
+                    string.addAttribute(attribute, value: newValue, range: range)
+                    string.fixAttributes(in: range)
+                }
             }
         }
-        string.endEditing()
     }
 }

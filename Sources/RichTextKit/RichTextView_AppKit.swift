@@ -91,9 +91,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         format: RichTextDataFormat,
         linkColor: ColorRepresentable
     ) {
-        attributedString = .empty
         setupInitialFontSize()
-        attributedString = text
         allowsImageEditing = true
         allowsUndo = true
         backgroundColor = .clear
@@ -104,6 +102,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         layoutManager?.defaultAttachmentScaling = NSImageScaling.scaleProportionallyDown
         self.linkColor = linkColor
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        attributedString = text
     }
     
   

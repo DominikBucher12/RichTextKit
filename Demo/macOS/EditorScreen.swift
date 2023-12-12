@@ -16,7 +16,7 @@ struct EditorScreen: View {
     }
 
     @State
-    private var text = NSAttributedString.empty
+    private var text = NSAttributedString(string: "Lets go and write nice text editor.")
 
     @StateObject
     var context = RichTextContext()

@@ -69,11 +69,10 @@ public extension RichTextAttributeWriter {
         style.headIndent = newIndent
 
         attributes[.paragraphStyle] = style
-        text.beginEditing()
-        text.setAttributes(attributes, range: safeRange)
-        text.fixAttributes(in: safeRange)
-        text.endEditing()
-
+        text.edit {
+            text.setAttributes(attributes, range: safeRange)
+            text.fixAttributes(in: safeRange)
+        }
         return attributes
     }
 
@@ -86,6 +85,15 @@ public extension RichTextAttributeWriter {
             points: points,
             atIndex: Int(index)
         )
+    }
+}
+
+extension NSMutableAttributedString {
+    func edit(_ closure: () -> Void, from function: String = #function) {
+        self.beginEditing()
+        print("beginEditing")
+        closure()
+        self.endEditing()
     }
 }
 
