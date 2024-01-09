@@ -155,6 +155,7 @@ public extension RichTextCoordinator {
     }
 }
 
+
 // MARK: - Internal Extensions
 
 extension RichTextCoordinator {
@@ -200,8 +201,8 @@ extension RichTextCoordinator {
             }
         }
 
-        if let foreground = textView.currentColor(.foreground),
-            richTextContext.foregroundColor != foreground {
+        let foreground = textView.currentColor(.foreground)
+        if richTextContext.foregroundColor != foreground {
             richTextContext.foregroundColor = foreground
         }
 
@@ -220,9 +221,8 @@ extension RichTextCoordinator {
             richTextContext.strikethroughColor = strikethrough
         }
 
-        
-        if let underline = textView.currentColor(.underline),
-            richTextContext.foregroundColor != underline {
+        let underline = textView.currentColor(.underline)
+        if richTextContext.foregroundColor != underline {
             richTextContext.foregroundColor = underline
         }
 
@@ -241,8 +241,8 @@ extension RichTextCoordinator {
             richTextContext.canUndoLatestChange = canUndo
         }
 
-        if let fontName = textView.currentFontName,
-            richTextContext.fontName != fontName {
+        let fontName = textView.currentFontName ?? ""
+        if richTextContext.fontName != fontName {
             richTextContext.fontName = fontName
         }
 

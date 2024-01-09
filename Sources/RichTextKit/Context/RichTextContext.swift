@@ -58,7 +58,7 @@ public class RichTextContext: ObservableObject {
     public internal(set) var selectedRange = NSRange()
 
 
-    // MARK: - Observable properies
+    // MARK: - Observable properties
 
     /// The current background color, if any.
     @Published
@@ -86,7 +86,7 @@ public class RichTextContext: ObservableObject {
 
     /// The current font name.
     @Published
-    public var fontName = "system"
+    public var fontName = ""
 
     /// The current font size.
     @Published
@@ -94,7 +94,7 @@ public class RichTextContext: ObservableObject {
 
     /// The current foreground color, if any.
     @Published
-    public var foregroundColor: ColorRepresentable = ColorRepresentable.textColor
+    public var foregroundColor: ColorRepresentable?
 
     /// The currently highlighted range, if any.
     @Published
