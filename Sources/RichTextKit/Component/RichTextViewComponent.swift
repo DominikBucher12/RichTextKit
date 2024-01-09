@@ -29,6 +29,9 @@ public protocol RichTextViewComponent: AnyObject,
     RichTextPdfDataReader
 {
 
+    /// Configuration for component including default (fallback) setup
+    var configuration: RichTextConfiguration { get }
+    
     /// The text view's frame.
     var frame: CGRect { get }
 
@@ -139,18 +142,10 @@ public extension RichTextViewComponent {
 internal extension RichTextViewComponent {
 
     /// This can be called to setup the initial font size.
-    func setupInitialFontSize() {
-        let font = FontRepresentable.standardRichTextFont
-        let size = font.pointSize
-        setCurrentFontSize(size)
-    }
-
-    /// This can be called to setup an initial text color.
-    func trySetupInitialTextColor(
-        for text: NSAttributedString,
-        _ action: () -> Void
-    ) {
-        guard text.string.isEmpty else { return }
-        action()
+    func setupComponent(from configuration: RichTextConfiguration) {
+        let font = configuration.defaultFont
+        setCurrentFont(font)
+        setRichTextColor(.foreground, to: configuration.foregroundColor)
+        setRichTextColor(.background, to: configuration.backgroundColor)
     }
 }

@@ -11,34 +11,34 @@ import SwiftUI
 public enum LinkConfiguration {
     case none
     case customLinkAttributes(RichTextAttributes)
-    case customColor(Color)
+    case customColor(ColorRepresentable)
 }
 
 public protocol RichTextConfiguration {
-    var foregroundColor: Color { get }
-    var backgroundColor: Color { get }
+    var foregroundColor: ColorRepresentable { get }
+    var backgroundColor: ColorRepresentable { get }
     var defaultFont: FontRepresentable { get }
     var linkConfiguration: LinkConfiguration { get }
 }
 
 public enum RichTextConfigurations {
     public static let `default`: RichTextConfiguration = RichTextConfigurationImpl(
-        foregroundColor: .primary,
-        backgroundColor: .clear,
+        foregroundColor: ColorRepresentable.label,
+        backgroundColor: ColorRepresentable.clear,
         defaultFont: FontRepresentable.standardRichTextFont,
         linkConfiguration: .none
     )
 }
 
 private struct RichTextConfigurationImpl: RichTextConfiguration {
-    public var foregroundColor: Color
-    public var backgroundColor: Color
+    public var foregroundColor: ColorRepresentable
+    public var backgroundColor: ColorRepresentable
     public var defaultFont: FontRepresentable
     public var linkConfiguration: LinkConfiguration
     
     fileprivate init(
-        foregroundColor: Color, 
-        backgroundColor: Color, 
+        foregroundColor: ColorRepresentable, 
+        backgroundColor: ColorRepresentable, 
         defaultFont: FontRepresentable, 
         linkConfiguration: LinkConfiguration
     ) {

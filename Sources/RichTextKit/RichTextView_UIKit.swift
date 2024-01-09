@@ -52,7 +52,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
     /// The style to use when highlighting text in the view.
     public var highlightingStyle: RichTextHighlightingStyle = .standard
 
-    private var configuration: RichTextConfiguration = RichTextConfigurations.default
+    public private(set) var configuration: RichTextConfiguration = RichTextConfigurations.default
     /**
      The image configuration to use by the rich text view.
 
@@ -169,7 +169,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
         configuration: RichTextConfiguration
     ) {
         attributedString = .empty
-        setupInitialFontSize()
+        setupComponent(from: configuration)
         imageConfiguration = standardImageConfiguration(for: format)
         text.autosizeImageAttachments(maxSize: imageAttachmentMaxSize)
         attributedString = text
@@ -178,9 +178,6 @@ open class RichTextView: UITextView, RichTextViewComponent {
         backgroundColor = .clear
         richTextDataFormat = format
         spellCheckingType = .no
-        trySetupInitialTextColor(for: text) {
-            textColor = .label
-        }
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     }
 

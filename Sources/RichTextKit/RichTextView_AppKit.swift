@@ -92,14 +92,11 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         configuration: RichTextConfiguration
     ) {
         attributedString = .empty
-        setupInitialFontSize()
+        setupComponent(from: configuration)
         attributedString = text
         allowsImageEditing = true
         allowsUndo = true
         backgroundColor = .clear
-        trySetupInitialTextColor(for: text) {
-            textColor = .textColor
-        }
         imageConfiguration = standardImageConfiguration(for: format)
         layoutManager?.defaultAttachmentScaling = NSImageScaling.scaleProportionallyDown
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)

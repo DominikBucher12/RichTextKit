@@ -86,7 +86,7 @@ public class RichTextContext: ObservableObject {
 
     /// The current font name.
     @Published
-    public var fontName = ""
+    public var fontName = "system"
 
     /// The current font size.
     @Published
