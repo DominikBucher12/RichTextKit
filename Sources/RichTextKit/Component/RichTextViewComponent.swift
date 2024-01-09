@@ -56,7 +56,8 @@ public protocol RichTextViewComponent: AnyObject,
     /// Setup the view with a text and ``RichTextDataFormat``.
     func setup(
         with text: NSAttributedString,
-        format: RichTextDataFormat
+        format: RichTextDataFormat,
+        configuration: RichTextConfiguration
     )
 
 
@@ -109,10 +110,11 @@ public extension RichTextViewComponent {
     /// Setup the view with data and a ``RichTextDataFormat``.
     func setup(
         with data: Data,
-        format: RichTextDataFormat
+        format: RichTextDataFormat,
+        configuration: RichTextConfiguration
     ) throws {
         let string = try NSAttributedString(data: data, format: format)
-        setup(with: string, format: format)
+        setup(with: string, format: format, configuration: configuration)
     }
 
     /// Get the image configuration for a certain format.

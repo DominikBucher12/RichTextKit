@@ -88,7 +88,8 @@ open class RichTextView: NSTextView, RichTextViewComponent {
      */
     open func setup(
         with text: NSAttributedString,
-        format: RichTextDataFormat
+        format: RichTextDataFormat,
+        configuration: RichTextConfiguration
     ) {
         attributedString = .empty
         setupInitialFontSize()
