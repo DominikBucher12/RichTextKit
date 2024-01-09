@@ -23,7 +23,7 @@ public protocol RichTextConfiguration {
 
 public enum RichTextConfigurations {
     public static let `default`: RichTextConfiguration = RichTextConfigurationImpl(
-        foregroundColor: ColorRepresentable.label,
+        foregroundColor: ColorRepresentable.blue,
         backgroundColor: ColorRepresentable.clear,
         defaultFont: FontRepresentable.standardRichTextFont,
         linkConfiguration: .none

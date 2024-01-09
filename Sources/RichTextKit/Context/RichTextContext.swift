@@ -94,7 +94,7 @@ public class RichTextContext: ObservableObject {
 
     /// The current foreground color, if any.
     @Published
-    public var foregroundColor: ColorRepresentable?
+    public var foregroundColor: ColorRepresentable = ColorRepresentable.textColor
 
     /// The currently highlighted range, if any.
     @Published

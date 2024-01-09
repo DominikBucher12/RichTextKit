@@ -201,8 +201,8 @@ extension RichTextCoordinator {
             }
         }
 
-        let foreground = textView.currentColor(.foreground)
-        if richTextContext.foregroundColor != foreground {
+        if let foreground = textView.currentColor(.foreground),
+            richTextContext.foregroundColor != foreground {
             richTextContext.foregroundColor = foreground
         }
 
@@ -221,8 +221,9 @@ extension RichTextCoordinator {
             richTextContext.strikethroughColor = strikethrough
         }
 
-        let underline = textView.currentColor(.underline)
-        if richTextContext.foregroundColor != underline {
+        
+        if let underline = textView.currentColor(.underline),
+            richTextContext.foregroundColor != underline {
             richTextContext.foregroundColor = underline
         }
 
@@ -241,8 +242,8 @@ extension RichTextCoordinator {
             richTextContext.canUndoLatestChange = canUndo
         }
 
-        let fontName = textView.currentFontName ?? ""
-        if richTextContext.fontName != fontName {
+        if let fontName = textView.currentFontName,
+            richTextContext.fontName != fontName {
             richTextContext.fontName = fontName
         }
 

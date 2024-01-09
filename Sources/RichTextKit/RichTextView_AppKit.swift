@@ -27,12 +27,13 @@ open class RichTextView: NSTextView, RichTextViewComponent {
 
     // MARK: - Properties
 
+    public private(set) var configuration: RichTextConfiguration = RichTextConfigurations.default
+    
     /// The style to use when highlighting text in the view.
     public var highlightingStyle: RichTextHighlightingStyle = .standard
 
     /// The image configuration to use by the rich text view.
     public var imageConfiguration: RichTextImageConfiguration = .disabled
-
 
     // MARK: - Overrides
 
@@ -92,7 +93,6 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         configuration: RichTextConfiguration
     ) {
         attributedString = .empty
-        setupComponent(from: configuration)
         attributedString = text
         allowsImageEditing = true
         allowsUndo = true
@@ -100,6 +100,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         imageConfiguration = standardImageConfiguration(for: format)
         layoutManager?.defaultAttachmentScaling = NSImageScaling.scaleProportionallyDown
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        setupComponent(from: configuration)
     }
 
 

@@ -144,8 +144,10 @@ internal extension RichTextViewComponent {
     /// This can be called to setup the initial font size.
     func setupComponent(from configuration: RichTextConfiguration) {
         let font = configuration.defaultFont
-        setCurrentFont(font)
+        setCurrentFontTypingAttribute(font)
         setRichTextColor(.foreground, to: configuration.foregroundColor)
         setRichTextColor(.background, to: configuration.backgroundColor)
+        setTypingAttribute(.foregroundColor, to: configuration.foregroundColor)
+        setTypingAttribute(.backgroundColor, to: configuration.backgroundColor)
     }
 }
