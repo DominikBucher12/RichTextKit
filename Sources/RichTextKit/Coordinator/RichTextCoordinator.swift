@@ -155,7 +155,6 @@ public extension RichTextCoordinator {
     }
 }
 
-
 // MARK: - Internal Extensions
 
 extension RichTextCoordinator {
