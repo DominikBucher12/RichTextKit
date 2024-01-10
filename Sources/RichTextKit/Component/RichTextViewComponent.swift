@@ -145,6 +145,7 @@ internal extension RichTextViewComponent {
     func setupComponent(from configuration: RichTextConfiguration) {
         let font = configuration.defaultFont
         setCurrentFontTypingAttribute(font)
+        setRichTextFont(font)
         setRichTextColor(.foreground, to: configuration.foregroundColor)
         setRichTextColor(.background, to: configuration.backgroundColor)
         setTypingAttribute(.foregroundColor, to: configuration.foregroundColor)

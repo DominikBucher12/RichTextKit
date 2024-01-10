@@ -86,11 +86,11 @@ public class RichTextContext: ObservableObject {
 
     /// The current font name.
     @Published
-    public var fontName = ""
+    public var fontName = RichTextConfigurations.default.defaultFont.fontName
 
     /// The current font size.
     @Published
-    public var fontSize = CGFloat.standardRichTextFontSize
+    public var fontSize = RichTextConfigurations.default.defaultFont.pointSize
 
     /// The current foreground color, if any.
     @Published
