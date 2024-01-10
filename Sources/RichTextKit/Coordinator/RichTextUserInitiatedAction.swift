@@ -22,6 +22,7 @@ enum RichTextUserInitiatedAction {
     case triggerAction(RichTextAction)
     case underlineColor(ColorRepresentable)
     case changeStyle(RichTextStyle, Bool)
+    case link(URL?)
 }
 
 extension String: Insertable {}
