@@ -43,6 +43,8 @@ extension RichTextCoordinator {
                 self?.setHighlightedRange(to: range)
             case .highlightingStyle(let style):
                 self?.textView.highlightingStyle = style
+            case .link(let url):
+                self?.setLink(url)
             }
         }
         .store(in: &cancellables)
@@ -198,6 +200,10 @@ internal extension RichTextCoordinator {
         } else {
             textView.setCurrentRichTextStyleTypingAttributes(style, to: newValue)
         }
+    }
+    
+    func setLink(_ url: URL?) {
+        textView.setCurrentRichTextLink(url)
     }
 }
 
