@@ -137,7 +137,9 @@ private extension RichTextViewComponent {
         let newLine = NSAttributedString(string: "\n", attributes: currentRichTextAttributes)
         let content = NSMutableAttributedString(attributedString: richText)
         guard let insertString = getAttachmentString(for: image) else { return }
+        content.insert(NSAttributedString(string: "\n"), at: index)
         
+        insertString.insert(newLine, at: insertString.length)
         insertString.addAttributes(currentRichTextAttributes, range: insertString.richTextRange)
         content.insert(insertString, at: index)
         
