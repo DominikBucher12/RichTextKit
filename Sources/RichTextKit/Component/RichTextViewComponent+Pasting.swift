@@ -22,12 +22,9 @@ public extension RichTextViewComponent {
      Paste an image into the text view, at a certain index.
 
      For now, pasting will automatically insert the image as
-     a jpeg with a 0.7 compression quality. We should expand
-     this to allow us to define format, compression etc. but
-     for now this is hard coded and a future TODO.
-
-     Pasting images only works on iOS, tvOS and macOS. Other
-     platform will trigger an assertion failure.
+     a compressed jpeg. We should expand this to allow us to
+     define format, compression etc. For now, it's hardcoded
+     and a future TODO.
 
      - Parameters:
        - image: The image to paste.
@@ -37,7 +34,7 @@ public extension RichTextViewComponent {
     func pasteImage(
         _ image: ImageRepresentable,
         at index: Int,
-        moveCursorToPastedContent: Bool = false
+        moveCursorToPastedContent: Bool = true
     ) {
         pasteImages(
             [image],
@@ -137,12 +134,11 @@ private extension RichTextViewComponent {
         let newLine = NSAttributedString(string: "\n", attributes: currentRichTextAttributes)
         let content = NSMutableAttributedString(attributedString: richText)
         guard let insertString = getAttachmentString(for: image) else { return }
-        content.insert(NSAttributedString(string: "\n"), at: index)
-        
+      
         insertString.insert(newLine, at: insertString.length)
         insertString.addAttributes(currentRichTextAttributes, range: insertString.richTextRange)
         content.insert(insertString, at: index)
-        
+      
         setRichText(content)
     }
 }
