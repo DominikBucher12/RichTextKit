@@ -27,12 +27,13 @@ open class RichTextView: NSTextView, RichTextViewComponent {
 
     // MARK: - Properties
 
+    public private(set) var configuration: RichTextConfiguration = RichTextConfigurations.default
+    
     /// The style to use when highlighting text in the view.
     public var highlightingStyle: RichTextHighlightingStyle = .standard
 
     /// The image configuration to use by the rich text view.
     public var imageConfiguration: RichTextImageConfiguration = .disabled
-
 
     // MARK: - Overrides
 
@@ -88,20 +89,18 @@ open class RichTextView: NSTextView, RichTextViewComponent {
      */
     open func setup(
         with text: NSAttributedString,
-        format: RichTextDataFormat
+        format: RichTextDataFormat,
+        configuration: RichTextConfiguration
     ) {
         attributedString = .empty
-        setupInitialFontSize()
         attributedString = text
         allowsImageEditing = true
         allowsUndo = true
         backgroundColor = .clear
-        trySetupInitialTextColor(for: text) {
-            textColor = .textColor
-        }
         imageConfiguration = standardImageConfiguration(for: format)
         layoutManager?.defaultAttachmentScaling = NSImageScaling.scaleProportionallyDown
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        setupComponent(from: configuration)
     }
 
 

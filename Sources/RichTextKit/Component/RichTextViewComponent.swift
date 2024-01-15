@@ -29,6 +29,9 @@ public protocol RichTextViewComponent: AnyObject,
     RichTextPdfDataReader
 {
 
+    /// Configuration for component including default (fallback) setup
+    var configuration: RichTextConfiguration { get }
+    
     /// The text view's frame.
     var frame: CGRect { get }
 
@@ -56,7 +59,8 @@ public protocol RichTextViewComponent: AnyObject,
     /// Setup the view with a text and ``RichTextDataFormat``.
     func setup(
         with text: NSAttributedString,
-        format: RichTextDataFormat
+        format: RichTextDataFormat,
+        configuration: RichTextConfiguration
     )
 
 
@@ -109,10 +113,11 @@ public extension RichTextViewComponent {
     /// Setup the view with data and a ``RichTextDataFormat``.
     func setup(
         with data: Data,
-        format: RichTextDataFormat
+        format: RichTextDataFormat,
+        configuration: RichTextConfiguration
     ) throws {
         let string = try NSAttributedString(data: data, format: format)
-        setup(with: string, format: format)
+        setup(with: string, format: format, configuration: configuration)
     }
 
     /// Get the image configuration for a certain format.
@@ -137,18 +142,13 @@ public extension RichTextViewComponent {
 internal extension RichTextViewComponent {
 
     /// This can be called to setup the initial font size.
-    func setupInitialFontSize() {
-        let font = FontRepresentable.standardRichTextFont
-        let size = font.pointSize
-        setCurrentFontSize(size)
-    }
-
-    /// This can be called to setup an initial text color.
-    func trySetupInitialTextColor(
-        for text: NSAttributedString,
-        _ action: () -> Void
-    ) {
-        guard text.string.isEmpty else { return }
-        action()
+    func setupComponent(from configuration: RichTextConfiguration) {
+        let font = configuration.defaultFont
+        setCurrentFontTypingAttribute(font)
+        setRichTextFont(font)
+        setRichTextColor(.foreground, to: configuration.foregroundColor)
+        setRichTextColor(.background, to: configuration.backgroundColor)
+        setTypingAttribute(.foregroundColor, to: configuration.foregroundColor)
+        setTypingAttribute(.backgroundColor, to: configuration.backgroundColor)
     }
 }

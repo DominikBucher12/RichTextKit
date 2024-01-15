@@ -79,7 +79,7 @@ public extension RichTextViewComponent {
 
     @available(*, deprecated, renamed: "setCurrentFont(_:)")
     func setCurrentFont(to font: FontRepresentable) {
-        setCurrentFont(font)
+        setCurrentFontTypingAttribute(font)
     }
 
     @available(*, deprecated, renamed: "setCurrentFontName(_:)")

@@ -37,7 +37,7 @@ public extension RichTextViewComponent {
             guard shouldAddOrRemove(style, newValue, given: styles) else { return }
             guard let font = currentFont else { return }
             guard let newFont = newFont(for: font, byToggling: style) else { return }
-            setCurrentFont(newFont)
+            setCurrentFontTypingAttribute(newFont)
         case .underlined:
             setTypingAttribute(.underlineStyle, to: value)
         case .strikethrough:

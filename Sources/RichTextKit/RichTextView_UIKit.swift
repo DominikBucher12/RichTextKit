@@ -26,23 +26,24 @@ extension RichTextView: UIDropInteractionDelegate {}
  */
 open class RichTextView: UITextView, RichTextViewComponent {
 
-
     // MARK: - Initializers
 
     public convenience init(
         data: Data,
-        format: RichTextDataFormat = .archivedData
+        format: RichTextDataFormat = .archivedData,
+        configuration: RichTextConfiguration
     ) throws {
         self.init()
-        try self.setup(with: data, format: format)
+        try self.setup(with: data, format: format, configuration: configuration)
     }
 
     public convenience init(
         string: NSAttributedString,
-        format: RichTextDataFormat = .archivedData
+        format: RichTextDataFormat = .archivedData,
+        configuration: RichTextConfiguration
     ) {
         self.init()
-        self.setup(with: string, format: format)
+        self.setup(with: string, format: format, configuration: configuration)
     }
 
 
@@ -51,6 +52,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
     /// The style to use when highlighting text in the view.
     public var highlightingStyle: RichTextHighlightingStyle = .standard
 
+    public private(set) var configuration: RichTextConfiguration = RichTextConfigurations.default
     /**
      The image configuration to use by the rich text view.
 
@@ -92,6 +94,19 @@ open class RichTextView: UITextView, RichTextViewComponent {
 
     // MARK: - Overrides
 
+    @available(
+        *,
+         deprecated,
+         message: "Please use one of the convenience initializers to provide text for TextView. Initializing with this creates unexpected results."
+    )
+    override public init(frame: CGRect, textContainer: NSTextContainer?) {
+        super.init(frame: frame, textContainer: textContainer)
+    }
+    
+    required public init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     /**
      Layout subviews and auto-resize images in the rich text.
 
@@ -105,7 +120,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
             if frame.size == .zero { return }
             if !isInitialFrameSetupNeeded { return }
             isInitialFrameSetupNeeded = false
-            setup(with: attributedString, format: richTextDataFormat)
+            setup(with: attributedString, format: richTextDataFormat, configuration: configuration)
         }
     }
 
@@ -150,10 +165,11 @@ open class RichTextView: UITextView, RichTextViewComponent {
      */
     open func setup(
         with text: NSAttributedString,
-        format: RichTextDataFormat
+        format: RichTextDataFormat,
+        configuration: RichTextConfiguration
     ) {
         attributedString = .empty
-        setupInitialFontSize()
+        setupComponent(from: configuration)
         imageConfiguration = standardImageConfiguration(for: format)
         text.autosizeImageAttachments(maxSize: imageAttachmentMaxSize)
         attributedString = text
@@ -162,9 +178,6 @@ open class RichTextView: UITextView, RichTextViewComponent {
         backgroundColor = .clear
         richTextDataFormat = format
         spellCheckingType = .no
-        trySetupInitialTextColor(for: text) {
-            textColor = .label
-        }
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     }
 
